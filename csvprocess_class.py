@@ -51,6 +51,30 @@ class csvprocess_class():
 		#dfa.to_csv(saved_filename)
 		dfa.to_csv(saved_filename,index=False)
 
+		
+	def csv_2_arff(self,filename,selected_features_index)
+		#selected_features_index=[4,8,5,1,3,11,12,10,0]
+		df=pd.read_csv(filename)
+		col=df.columns.values
+		col_name=[col[i-1] for i in selected_features_index]
+		df_s=df[col_name]
+		df_s.to_csv('new_'+filename,index=False)
+
+		time.sleep(2)
+
+		newlines=[]
+		with open('new_'+filename,'r') as f:
+			newlines=f.read_lines()[1:]
+        
+		with open('new_'+filename[:-4]+'.arff','w') as f:
+			f.write('@relation train\n')
+		for i in col_name[:-1]:
+			f.write('@attribute '+i+' numeric\n')
+		f.write('@attribute y {0,1,2,3}\n')
+		f.write('@data\n')
+		for i in newlines:
+			f.write(i)
+	
 #import os
 #files=sorted(os.listdir("./input"))
 
