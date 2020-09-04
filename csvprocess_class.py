@@ -1,5 +1,5 @@
 import pandas as pd
-
+import time
 
 
 class csvprocess_class():
@@ -51,7 +51,8 @@ class csvprocess_class():
 		#dfa.to_csv(saved_filename)
 		dfa.to_csv(saved_filename,index=False)
 
-		
+
+
 	def csv_2_arff(self,filename,selected_features_index):
 		#selected_features_index=[4,8,5,1,3,11,12,10,0]
 		df=pd.read_csv(filename)
@@ -63,18 +64,24 @@ class csvprocess_class():
 		time.sleep(2)
 
 		newlines=[]
-		with open('new_'+filename,'r') as f:
-			newlines=f.read_lines()[1:]
-        
+		with open('new_'+filename,'r') as f0:
+			newlines=f0.readlines()[1:]
+
 		with open('new_'+filename[:-4]+'.arff','w') as f:
 			f.write('@relation train\n')
-		for i in col_name[:-1]:
-			f.write('@attribute '+i+' numeric\n')
-		f.write('@attribute y {0,1,2,3}\n')
-		f.write('@data\n')
-		for i in newlines:
-			f.write(i)
-	
+			for i in col_name[:-1]:
+				f.write('@attribute '+i+' numeric\n')
+			f.write('@attribute y {0,1,2,3}\n')
+			f.write('@data\n')
+			for i in newlines:
+				f.write(i)
+
+
+filename='static_traindata.csv'
+csvc=csvprocess_class()
+csvc.csv_2_arff(filename,[4,8,5,1,3,11,12,10,0])
+
+exit()
 #import os
 #files=sorted(os.listdir("./input"))
 
