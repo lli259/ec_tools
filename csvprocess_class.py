@@ -52,7 +52,7 @@ class csvprocess_class():
 		dfa.to_csv(saved_filename,index=False)
 
 		
-	def csv_2_arff(self,filename,selected_features_index)
+	def csv_2_arff(self,filename,selected_features_index):
 		#selected_features_index=[4,8,5,1,3,11,12,10,0]
 		df=pd.read_csv(filename)
 		col=df.columns.values
