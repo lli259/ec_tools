@@ -28,6 +28,8 @@ class csvprocess_class():
 		dfa.to_csv(saved_filename,index=False)
 
 	def combine_acol_bcol(self,afile,aindex,a_col,anewname,bfile,bindex,b_col,bnewname,saved_filename):
+		
+		#read,set_index,select_col,set_col,join,dropna
 		dfa=pd.read_csv(afile)
 		dfa=dfa.set_index(aindex)
 
